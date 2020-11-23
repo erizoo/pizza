@@ -1,0 +1,42 @@
+{
+  "http": {
+    "host": "127.0.0.1",
+    "port": 8081
+  },
+  "database": {
+    "host": "127.0.0.1",
+    "port": 3306,
+    "user": "root",
+    "pass": "Alex20968",
+    "db": "pizzafam_db"
+  },
+  "common": {
+    "siteUrl": "https://kitobz.com",
+    "imagePath": "image",
+    "postPath": "index.php?route=blog/blog&blog_id="
+  },
+  "settings": {
+    "store": 6,
+    "storeName": "KITOBZ",
+    "storeUrl": "http://kitobz.com/",
+    "rootCategory": 60,
+    "bannersGroup": 10,
+    "booksDefaultLimit": 10,
+    "booksMaxLimit": 1000,
+    "postsDefaultLimit": 10,
+    "postsMaxLimit": 10,
+    "moduleNewBooks": 57,
+    "moduleFavouriteBooks": 58,
+    "moduleBestsellers": 59,
+    "payment": "Оплата при доставке",
+    "payment_code": "cod",
+    "shipping": "Доставка с фиксированной стоимостью доставки",
+    "shipping_code": "flat.flat",
+    "shipping_cost": 5
+  },
+  "jwt": {
+    "algo": "HS256",
+    "secret": "nW2iRtFcBwtRn82oDLEt6ynYOgnQqWZJ0igI0MVlcG3sOKG5PbahBuYuH61AAbm5",
+    "expire": 1209600
+  }
+}

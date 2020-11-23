@@ -1,0 +1,474 @@
+openapi: 3.0.1
+info:
+  title: Kitobz API
+  version: 0.2.3
+  x-logo:
+    url: 'https://kitobz.com/image/cache/catalog/kitobz/logo/logo%20png-200x60.png'
+    altText: Kitobz logo
+servers:
+  - url: 'https://kitobz.com/kapi/'
+    description: Main (production) server
+tags:
+  - name: Product
+  - name: Categories
+  - name: Posts
+  - name: Users
+  - name: Wishlist
+  - name: Addresses
+  - name: Cart
+    description: Attention! Cart item TTL - 1 hour
+  - name: Order
+paths:
+  /products:
+    get:
+      tags:
+        - Product
+      security:
+        - bearerAuth: []
+      summary: Get list of products
+      operationId: products.getProducts
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                    enum:
+                      - true
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/BookShort'
+                  pages:
+                    type: integer
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    BookShort:
+      type: object
+      properties:
+        id:
+          type: integer
+        image:
+          type: string
+        image200:
+          type: string
+        name:
+          type: string
+        author:
+          type: string
+        price:
+          type: number
+        is_discount:
+          type: boolean
+        discount_price:
+          type: number
+        discount_percent:
+          type: integer
+        status:
+          type: string
+        is_like:
+          type: boolean
+        badges:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+              text:
+                type: string
+              color:
+                type: string
+              background:
+                type: string
+        pdf:
+          type: string
+        rating:
+          type: integer
+    BookFull:
+      title: BookFull
+      type: object
+      properties:
+        id:
+          type: integer
+        image:
+          type: string
+        image200:
+          type: string
+        image400:
+          type: string
+        name:
+          type: string
+        author:
+          type: string
+        price:
+          type: number
+        is_discount:
+          type: boolean
+        discount_price:
+          type: number
+        discount_percent:
+          type: integer
+        status:
+          type: string
+        is_like:
+          type: boolean
+        badges:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+              text:
+                type: string
+              color:
+                type: string
+              background:
+                type: string
+        pdf:
+          type: string
+        rating:
+          type: integer
+        description:
+          type: string
+        categories:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+              name:
+                type: string
+              children:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    name:
+                      type: string
+        features:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              value:
+                type: string
+        reviews:
+          type: array
+          items:
+            type: object
+            properties:
+              author:
+                type: string
+              text:
+                type: string
+              rating:
+                type: integer
+              created:
+                type: string
+    Category:
+      type: object
+      properties:
+        id:
+          type: integer
+        image:
+          type: string
+        name:
+          type: string
+        count:
+          type: integer
+        children:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+              image:
+                type: string
+              name:
+                type: string
+              count:
+                type: integer
+              children:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    image:
+                      type: string
+                    name:
+                      type: string
+                    count:
+                      type: integer
+                    children:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                          image:
+                            type: string
+                          name:
+                            type: string
+                          count:
+                            type: integer
+                          children:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                id:
+                                  type: integer
+                                image:
+                                  type: string
+                                name:
+                                  type: string
+                                count:
+                                  type: integer
+    Banner:
+      type: object
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        link:
+          type: string
+        image:
+          type: string
+    PostShort:
+      type: object
+      properties:
+        id:
+          type: integer
+        link:
+          type: string
+        title:
+          type: string
+        image:
+          type: string
+        author:
+          type: string
+        created:
+          type: string
+        seen:
+          type: integer
+        comments:
+          type: integer
+    PostFull:
+      type: object
+      properties:
+        id:
+          type: integer
+        link:
+          type: string
+        title:
+          type: string
+        image:
+          type: string
+        author:
+          type: string
+        created:
+          type: string
+        seen:
+          type: integer
+        comments:
+          type: integer
+        description:
+          type: string
+        comments_list:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              comment:
+                type: string
+              created:
+                type: string
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+        email:
+          type: string
+        name:
+          type: string
+        phone:
+          type: string
+        newsletter:
+          type: integer
+    CartItem:
+      type: object
+      properties:
+        id:
+          type: integer
+        image:
+          type: string
+        name:
+          type: string
+        author:
+          type: string
+        price:
+          type: number
+        is_discount:
+          type: boolean
+        discount_price:
+          type: number
+        discount_percent:
+          type: integer
+        is_like:
+          type: boolean
+        badges:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+              text:
+                type: string
+              color:
+                type: string
+              background:
+                type: string
+        quantity:
+          type: integer
+    Order:
+      type: object
+      properties:
+        id:
+          type: integer
+        status:
+          type: string
+        created:
+          type: string
+        count:
+          type: integer
+          description: Count of products
+        summary:
+          type: number
+          description: Summary price
+    OrderFull:
+      type: object
+      properties:
+        id:
+          type: integer
+        status:
+          type: string
+        created:
+          type: string
+        paymentName:
+          type: string
+        shippingName:
+          type: string
+        phone:
+          type: string
+        comment:
+          type: string
+        cart:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+              image:
+                type: string
+              name:
+                type: string
+              model:
+                type: string
+              price:
+                type: number
+              quantity:
+                type: integer
+              total:
+                type: number
+        count:
+          type: integer
+          description: Count of products
+        total:
+          type: number
+          description: Sum of products
+        shipping:
+          type: number
+          description: Shipping cost
+        summary:
+          type: number
+          description: Summary price
+    Address:
+      properties:
+        address_id:
+          type: integer
+        customer_id:
+          type: integer
+        main:
+          type: boolean
+        firstname:
+          type: string
+        lastname:
+          type: string
+        company:
+          type: string
+        address_1:
+          type: string
+        address_2:
+          type: string
+        city:
+          type: string
+        postcode:
+          type: string
+        country_id:
+          type: integer
+        zone_id:
+          type: integer
+    Country:
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        iso_code_2:
+          type: string
+        iso_code_3:
+          type: string
+    Zone:
+      properties:
+        id:
+          type: integer
+        country_id:
+          type: integer
+        name:
+          type: string
+        code:
+          type: string
+    Error:
+      properties:
+        ok:
+          type: boolean
+          enum:
+            - false
+        error:
+          type: string

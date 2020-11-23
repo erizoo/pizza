@@ -1,0 +1,28 @@
+{
+  "name": "pizza_backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "config": "^3.3.0",
+    "fastify": "^3.8.0",
+    "fastify-compress": "^3.4.0",
+    "fastify-env": "^2.1.0",
+    "fastify-helmet": "^5.0.3",
+    "fastify-jwt": "^1.5.0",
+    "fastify-openapi-generator": "^0.2.2",
+    "fastify-rate-limit": "^3.0.1",
+    "mysql2": "^2.2.5",
+    "sanitize-html": "^2.1.2",
+    "sequelize": "^6.3.5",
+    "sync-request": "^6.1.0",
+    "unescape": "^1.0.1"
+  }
+}
